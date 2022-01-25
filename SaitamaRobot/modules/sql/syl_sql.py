@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Column, String
 
-from Moebot.modules.sql import BASE, SESSION
+from SaitamaRobot.modules.sql import BASE, SESSION
 
 class SylChats(BASE):
     __tablename__ = "syl_chats"
