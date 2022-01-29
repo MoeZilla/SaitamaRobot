@@ -35,12 +35,10 @@ xsyl = SYL()
 def sylrm(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
-    match = re.match(r"rm_syl\((.+?)\)", query.data)
-    if match:
+    if match := re.match(r"rm_syl\((.+?)\)", query.data):
         user_id = match.group(1)
         chat: Optional[Chat] = update.effective_chat
-        is_syl = sql.rem_syl(chat.id)
-        if is_syl:
+        if is_syl := sql.rem_syl(chat.id):
             is_syl = sql.rem_syl(user_id)
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
@@ -61,12 +59,10 @@ def sylrm(update: Update, context: CallbackContext) -> str:
 def syladd(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
-    match = re.match(r"add_syl\((.+?)\)", query.data)
-    if match:
+    if match := re.match(r"add_syl\((.+?)\)", query.data):
         user_id = match.group(1)
         chat: Optional[Chat] = update.effective_chat
-        is_syl = sql.set_syl(chat.id)
-        if is_syl:
+        if is_syl := sql.set_syl(chat.id):
             is_syl = sql.set_syl(user_id)
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
@@ -108,10 +104,8 @@ def bluemoon_callback(update: Update, context: CallbackContext, should_message=T
     chat_id = update.effective_chat.id
     user = update.effective_user
 
-    is_syl = sql.is_syl(chat_id)
-    if is_syl:
+    if is_syl := sql.is_syl(chat_id):
         return
-        x = None
     try:
         x = xsyl.check(int(user.id))
     except:
